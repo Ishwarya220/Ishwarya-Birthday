@@ -111,9 +111,8 @@
       margin-top:16px;display:inline-flex;align-items:center;gap:8px;
       background:linear-gradient(135deg,var(--hot),#c71585);
       padding:10px 28px;border-radius:50px;font-size:1rem;font-weight:600;
-      box-shadow:0 0 30px rgba(255,20,147,.4);animation:pulse 2s ease-in-out infinite;
+      box-shadow:0 0 30px rgba(255,20,147,.4);
     }
-    @keyframes pulse{0%,100%{box-shadow:0 0 20px rgba(255,20,147,.4);transform:scale(1);}50%{box-shadow:0 0 50px rgba(255,20,147,.7);transform:scale(1.04);}}
     /* ig stats row */
     .ig-stats{
       display:flex;gap:32px;margin-top:28px;
@@ -262,8 +261,8 @@
 
     /* ── FOOTER ── */
     .footer{position:relative;z-index:1;text-align:center;padding:40px 20px 100px;background:#0d0d0d;color:rgba(255,255,255,.3);font-size:.8rem;letter-spacing:2px;}
-    .footer .hearts{font-size:1.5rem;animation:hb 1.2s ease-in-out infinite;}
-    @keyframes hb{0%,100%{transform:scale(1);}50%{transform:scale(1.3);}}
+    .footer .hearts{font-size:1.5rem;}
+
 
     /* ── CONFETTI ── */
     #confetti-canvas{position:fixed;top:0;left:0;width:100%;height:100%;pointer-events:none;z-index:999;}
@@ -924,7 +923,7 @@ document.addEventListener('keydown',e=>{
   background:#0d0d0d;display:flex;flex-direction:column;
   align-items:center;justify-content:center;gap:20px;
 ">
-  <div style="font-size:3rem;animation:bounce 1s ease-in-out infinite;">🎂</div>
+  <div style="font-size:3rem;">🎂</div>
   <div style="font-family:'Dancing Script',cursive;font-size:1.6rem;color:#ff69b4;">Loading your surprise...</div>
   <div style="width:200px;height:3px;background:rgba(255,255,255,.1);border-radius:3px;overflow:hidden;">
     <div id="loader-bar" style="height:100%;width:0%;background:linear-gradient(90deg,#ff1493,#ffd700);border-radius:3px;transition:width .05s linear;"></div>
@@ -960,16 +959,7 @@ document.addEventListener('keydown',e=>{
 .fade-in-up{opacity:0;transform:translateY(40px);transition:opacity .7s ease,transform .7s ease;}
 .fade-in-up.visible{opacity:1;transform:translateY(0);}
 
-/* Double-tap heart burst */
-.heart-burst{
-  position:fixed;pointer-events:none;z-index:997;
-  font-size:2rem;animation:heartFloat 1s ease forwards;
-}
-@keyframes heartFloat{
-  0%{opacity:1;transform:scale(0) translateY(0);}
-  50%{opacity:1;transform:scale(1.4) translateY(-30px);}
-  100%{opacity:0;transform:scale(1) translateY(-80px);}
-}
+/* Double-tap heart burst - removed */
 
 /* Typewriter cursor blink */
 .tw-cursor{display:inline-block;animation:twBlink .7s step-end infinite;}
@@ -1120,27 +1110,6 @@ window.addEventListener('scroll',()=>{
     }
   },{threshold:.3});
   obs.observe(p);
-})();
-
-// ── 7. DOUBLE-TAP HEART BURST on gallery posts ──
-(function(){
-  let lastTap=0;
-  document.getElementById('ig-grid').addEventListener('click',e=>{
-    const now=Date.now();
-    if(now-lastTap<350){
-      const rect=e.currentTarget.getBoundingClientRect();
-      for(let i=0;i<5;i++){
-        const h=document.createElement('div');
-        h.className='heart-burst';
-        h.textContent=['❤️','💕','💖','💗','💓'][i];
-        h.style.left=(e.clientX+Math.random()*40-20)+'px';
-        h.style.top=(e.clientY+Math.random()*40-20)+'px';
-        document.body.appendChild(h);
-        setTimeout(()=>h.remove(),1000);
-      }
-    }
-    lastTap=now;
-  });
 })();
 
 // ── 8. KEN BURNS on slideshow ──
